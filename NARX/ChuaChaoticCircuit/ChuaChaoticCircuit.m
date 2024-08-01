@@ -61,15 +61,10 @@ function dXdt = chua_system(~, X, alpha, beta, gamma, m0, m1)
     x = X(1);
     y = X(2);
     z = X(3);
-
-    % Chua's nonlinear characteristic
     f_x = m1 * x + 0.5 * (m0 - m1) * (abs(x + 1) - abs(x - 1));
-
-    % Differential equations
     dxdt = alpha * (y - x - f_x);
     dydt = x - y + z;
     dzdt = -beta * y - gamma * z;
-
     dXdt = [dxdt; dydt; dzdt];
 end
 
