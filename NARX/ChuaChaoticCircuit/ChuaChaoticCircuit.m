@@ -28,7 +28,6 @@ Y_pred = elm_predict(X_narx, model); % ELM Model Prediction
 
 
 figure('units', 'normalized', 'outerposition', [0 0 1 1], 'color', 'w')
-gif('ChuaNARXID.gif')
 for k = 1:length(Y_narx)
     if mod(k,100)==0
         subplot(221);
@@ -52,7 +51,6 @@ for k = 1:length(Y_narx)
         title(["Phase Space";"||Error|| : "+num2str(norm(X(1:k)-Y_pred(1:k)))]);
         view(45, 20)
         drawnow
-        gif
     end
 end
 
