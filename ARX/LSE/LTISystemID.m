@@ -20,7 +20,6 @@ y =  zeros(NoD,1);  % System Output
 for i=size(den,2):size(SimTime,1)
     y(i) = den(2)*y(i-1) + den(3)*y(i-2) + num(2)*u(i-1) + num(3)*u(i-2);
 end
-
 %% Batch (Offline) System Identification
 NoP = size(RealParam,2);  % Number Of Param
 b = y;

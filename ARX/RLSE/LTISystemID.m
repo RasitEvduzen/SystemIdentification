@@ -29,8 +29,7 @@ b = y;
 Fi = zeros(NoD,NoP);
 xRlse = 0*rand(NoP,1);     % Random start RLSE state vector
 xRlseHorizon = zeros(NoP,NoD);
-P = 1e9*eye(NoP,NoP);    % covariance matrix
-gif('RLSESysID.gif')
+P = 1e12*eye(NoP,NoP);    % covariance matrix
 for i=size(den,2):size(y,1)
     % ARX Model
     Fi(i,:)  = [y(i-1) y(i-2) u(i-1) u(i-2)];     % Regressor vector
@@ -56,7 +55,6 @@ for i=size(den,2):size(y,1)
         plot(ones(NoD,NoP).*xRlseHorizon',"k.",LineWidth=3)
         title("Parameters")
         drawnow
-        gif
     end
 end
 
