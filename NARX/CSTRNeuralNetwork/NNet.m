@@ -143,65 +143,23 @@ title(["Number of Neurons: "+ num2str(S);"Best Validation Error: "+ num2str(Fval
 %% Utility Functions
 function [ Wg, bh, Wc, bc ] = vector2matrix( x, S, R )
 % vector2matrix - Converts a Parameter Vector Back into Matrices and Biases
-%
-% This function reconstructs the weight matrices and bias vectors of a neural network
-% from a single-column vector (typically used in optimization or storage).
-%
-% Inputs:
-%   x - A single-column vector containing all the parameters.
-%   S - Number of hidden layer neurons (size of Wg rows).
-%   R - Number of input features (size of Wg columns).
-%
-% Outputs:
-%   Wg - Weight matrix for the hidden layer (S x R).
-%   bh - Bias vector for the hidden layer (S x 1).
-%   Wc - Weight matrix for the output layer (1 x S).
-%   bc - Bias for the output layer (scalar).
-
 Wg = [];  
-
-% Extract Wg (hidden layer weights)
 for r = 1:R
     Wg = [Wg, x((r-1)*S+1 : r*S)];
 end
-
-% Extract hidden layer bias (bh)
 bh(:,1) = x(S*R+1 : S*R+S);
-
-% Extract output layer weights (Wc)
 Wc(1,:) = x(S*(R+1)+1 : S*(R+2));
-
-% Extract output layer bias (bc)
 bc = x(S*(R+2)+1);
-
 end
 
 
 function [ x ] = matrix2vector( Wg, bh, Wc, bc )
-% matrix2vector - Converts Neural Network Weights and Biases into a Single Vector
-%
-% This function reshapes the weight matrices and bias vectors of a neural network
-% into a single column vector for optimization or storage purposes.
-%
-% Inputs:
-%   Wg - Weight matrix for the hidden layer.
-%   bh - Bias vector for the hidden layer.
-%   Wc - Weight matrix for the output layer.
-%   bc - Bias for the output layer.
-%
-% Output:
-%   x  - A single-column vector containing all the parameters.
-  
+% matrix2vector - Converts Neural Network Weights and Biases into a Single Vector  
 R = size(Wg, 2);  % Number of input features
-
 x = [];  
-
-% Flatten Wg column-wise and append to x
 for r = 1:R
     x = [x; Wg(:, r)];
 end
-
-% Append the bias and output layer weights
 x = [x; bh];   % Append hidden layer bias
 x = [x; Wc'];  % Append output layer weights (transposed)
 x = [x; bc];   % Append output layer bias
@@ -212,23 +170,6 @@ end
 
 function [ yhat ] = MISOYSAmodel( T, Wg, bh, Wc, bc )
 % MISOYSAmodel - Multi-Input Single-Output (MISO) Neural Network Model
-% 
-% This function computes the estimated output (yhat) for a given input matrix T
-% using a simple neural network model with hyperbolic tangent activation.
-%
-% Inputs:
-%   T  - Input data matrix (N x R), where N is the number of data points, and R is the number of inputs.
-%   Wg - Weight matrix for the hidden layer.
-%   bh - Bias vector for the hidden layer.
-%   Wc - Weight matrix for the output layer.
-%   bc - Bias for the output layer.
-%
-% Output:
-%   yhat - Estimated output vector (N x 1).
-
-[N, R] = size(T); % N: Number of data points, R: Number of input features
-
-% Process each data point
 for n = 1:N
     yhat(n,1) = Wc * tanh(Wg * T(n,:)' + bh) + bc; % Compute output using activation function
 end

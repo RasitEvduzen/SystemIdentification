@@ -3,15 +3,13 @@ clc; clear all; close all;
 % Written By: Rasit
 % Date: 22-Feb-2025
 %% Modeling a Nonlinear System in State Space using RK
-% The nonlinear state-space model of the system will be integrated using RK (Runge-Kutta),
-% simulated, and the collected data will be used to create a regression model.
+
 
 umax = 5;       % Amplitude limits
 umin = 0;
 Tmin = 0;       % Limits for the duration of the input signal (U)
 Tmax = 10;
 
-%% RK-based Nonlinear System State-Space Model Simulation
 x1 = 0.2;       % Initial conditions of the system states
 x2 = 0.1;
 x3 = 0.4;
@@ -19,7 +17,6 @@ y = x3;         % Defining x3 as the output state
 u = 1;          % Applied input signal
 Ts = 1e-2;      % Sampling period
 
-% Initialize storage variables
 X1(1) = x1;
 X2(1) = x2;
 X3(1) = x3;
@@ -49,9 +46,6 @@ while loop
 end
 
 %% Creating NARX Data Model
-% The system is excited by applying a random amplitude and duration input signal
-% to cover all modes of operation.
-
 ny = 3;  % Number of output delays
 nu = 4;  % Number of input delays
 L  = max([nu, ny]);
