@@ -5,10 +5,10 @@ clc; clear all; close all;
 %% Modeling a Nonlinear System in State Space using RK
 
 
-umax = 5;       % Amplitude limits
+umax = 1;       % Amplitude limits
 umin = 0;
 Tmin = 0;       % Limits for the duration of the input signal (U)
-Tmax = 10;
+Tmax = 50;
 
 x1 = 0.2;       % Initial conditions of the system states
 x2 = 0.1;

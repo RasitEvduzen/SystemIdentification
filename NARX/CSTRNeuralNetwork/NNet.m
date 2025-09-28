@@ -169,6 +169,7 @@ end
 
 
 function [ yhat ] = MISOYSAmodel( T, Wg, bh, Wc, bc )
+[N,R] = size(T);
 % MISOYSAmodel - Multi-Input Single-Output (MISO) Neural Network Model
 for n = 1:N
     yhat(n,1) = Wc * tanh(Wg * T(n,:)' + bh) + bc; % Compute output using activation function
